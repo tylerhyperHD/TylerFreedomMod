@@ -54,18 +54,16 @@ public class RankManager extends FreedomService
         {
             return Title.DEVELOPER;
         }
-        
+
         if (FUtil.SYS_ADMINS.contains(player.getName()))
         {
             return Title.SYS_ADMIN;
         }
-        
+
         if (FUtil.SPEC_EXECS.contains(player.getName()))
         {
             return Title.SPEC_EXEC;
         }
-        
-        
 
         final Rank rank = getRank(player);
 
@@ -182,24 +180,79 @@ public class RankManager extends FreedomService
                 {
                     loginMsg = ChatUtils.colorize(admin.getLoginMessage());
                 }
+
+                if (player.getName().equals("hypertechHD"))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is the " + ChatColor.translateAlternateColorCodes('&', "&9&lOwner &bof &6&lTylerFreedom"));
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&9Owner&8] &9" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (player.getName().equals("Generic_Trees"))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is the " + ChatColor.translateAlternateColorCodes('&', "&9&lCo-Owner &bof &6&lTylerFreedom"));
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&9Co-Owner&8] &9" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (FUtil.DEVELOPERS.contains(player.getName()))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&5Dev&8] &5" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (FUtil.SPEC_EXECS.contains(player.getName()))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&eSpEx&8] &e" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (FUtil.SYS_ADMINS.contains(player.getName()))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&4SyS&8] &4" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (plugin.al.isTelnetAdmin(player)) {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&2STA&8] &2" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else if (plugin.al.isSeniorAdmin(player))
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&dSrA&8] &d" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+                else
+                {
+                    FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
+                    player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&6SA&8] &b" + player.getName()));
+                    plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+                    flipCmdSpy(fPlayer);
+                }
+
             }
 
-            FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
-            plugin.pl.getPlayer(player).setTag(display.getColoredTag());
+//              This method breaks too much, imma remove it.
+//            String displayName = display.getColor() + player.getName();
+//            try
+//            {
+//                player.setPlayerListName(StringUtils.substring(displayName, 0, 16));
+//            }
+//            catch (IllegalArgumentException ex)
+//            {
+//            }
+        }
+    }
 
-            String displayName = display.getColor() + player.getName();
-            try
-            {
-                player.setPlayerListName(StringUtils.substring(displayName, 0, 16));
-            }
-            catch (IllegalArgumentException ex)
-            {
-            }
-        }
-        
-        if (plugin.al.isAdmin(player))
-        {
-            fPlayer.setCommandSpy(true);
-        }
+    public static void flipCmdSpy(FPlayer fPlayer)
+    {
+        fPlayer.setCommandSpy(true);
     }
 }
