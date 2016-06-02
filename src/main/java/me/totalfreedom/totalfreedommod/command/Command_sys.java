@@ -1,8 +1,8 @@
 package me.totalfreedom.totalfreedommod.command;
 
 import java.util.Date;
+import me.totalfreedom.totalfreedommod.FOPMUtil;
 import me.totalfreedom.totalfreedommod.admin.Admin;
-import me.totalfreedom.totalfreedommod.config.ConfigEntry;
 import me.totalfreedom.totalfreedommod.player.FPlayer;
 import me.totalfreedom.totalfreedommod.rank.Rank;
 import me.totalfreedom.totalfreedommod.util.FUtil;
@@ -21,7 +21,7 @@ public class Command_sys extends FreedomCommand
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
 
-        if (!FUtil.SYS_ADMINS.contains(sender.getName()) && !FUtil.SPEC_EXECS.contains(sender.getName()) && !ConfigEntry.SERVER_OWNERS.getList().contains(sender.getName()) && !sender.getName().equals("Generic_Trees"))
+        if (!FOPMUtil.isHighRank(sender))
         {
             sender.sendMessage(ChatColor.YELLOW + "You do not have permission to perform this command.");
 
@@ -81,6 +81,8 @@ public class Command_sys extends FreedomCommand
 
                     FUtil.adminAction(sender.getName(), "Adding " + player.getName() + " to the admin list", true);
                     plugin.al.addAdmin(new Admin(player));
+                    final FPlayer fPlayer = plugin.pl.getPlayer(player);
+                    fPlayer.setCommandSpy(true);
                 }
                 else // Existing admin
                 {
@@ -97,6 +99,8 @@ public class Command_sys extends FreedomCommand
 
                     plugin.al.save();
                     plugin.al.updateTables();
+                    final FPlayer fPlayer = plugin.pl.getPlayer(plugin.getServer().getPlayer(admin.getName()));
+                    fPlayer.setCommandSpy(true);
                 }
 
                 if (player != null)
@@ -130,6 +134,9 @@ public class Command_sys extends FreedomCommand
                 admin.setActive(false);
                 plugin.al.save();
                 plugin.al.updateTables();
+                
+                final FPlayer fPlayer = plugin.pl.getPlayer(plugin.getServer().getPlayer(targetName));
+                fPlayer.setCommandSpy(false);
 
                 return true;
             }

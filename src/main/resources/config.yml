@@ -223,7 +223,7 @@ announcer:
   interval: 600
 
   # Prefix for all announcements
-  prefix: '&5[&eTylerFreedom&5] &b'
+  prefix: '&8[&6&lTylerFreedom&8] &b'
 
   announcements:
     - 'Be sure to visit our forums at &6http://tylerfreedom.boards.net/'

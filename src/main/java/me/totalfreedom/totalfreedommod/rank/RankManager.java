@@ -59,6 +59,11 @@ public class RankManager extends FreedomService
         {
             return Title.SYS_ADMIN;
         }
+        
+        if (player.getName().equals("Generic_Trees"))
+        {
+            return Title.COOWNER;
+        }
 
         if (FUtil.SPEC_EXECS.contains(player.getName()))
         {
@@ -187,6 +192,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&9Owner&8] &9" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (player.getName().equals("Generic_Trees"))
                 {
@@ -194,6 +200,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&9Co-Owner&8] &9" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (FUtil.DEVELOPERS.contains(player.getName()))
                 {
@@ -201,6 +208,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&5Dev&8] &5" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (FUtil.SPEC_EXECS.contains(player.getName()))
                 {
@@ -208,6 +216,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&eSpEx&8] &e" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (FUtil.SYS_ADMINS.contains(player.getName()))
                 {
@@ -215,12 +224,14 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&4SyS&8] &4" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (plugin.al.isTelnetAdmin(player)) {
                     FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&2STA&8] &2" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else if (plugin.al.isSeniorAdmin(player))
                 {
@@ -228,6 +239,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&dSrA&8] &d" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
                 else
                 {
@@ -235,6 +247,7 @@ public class RankManager extends FreedomService
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&6SA&8] &b" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());
                     flipCmdSpy(fPlayer);
+                    return;
                 }
 
             }

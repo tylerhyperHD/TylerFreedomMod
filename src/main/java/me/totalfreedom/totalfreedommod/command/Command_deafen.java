@@ -20,6 +20,31 @@ public class Command_deafen extends FreedomCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+
+        if (args.length == 1)
+        {
+            if (args[0].equals("kill"))
+            {
+                for (final Player player : server.getOnlinePlayers())
+                {
+                    for (double percent = 0.0; percent <= 1.0; percent += (1.0 / STEPS))
+                    {
+                        final float pitch = 0;
+
+                        new BukkitRunnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                player.playSound(randomOffset(player.getLocation(), 5.0), Sound.values()[random.nextInt(Sound.values().length)], 0f, pitch);
+                            }
+                        }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
+                    }
+                }
+                return true;
+            }
+        }
+
         for (final Player player : server.getOnlinePlayers())
         {
             for (double percent = 0.0; percent <= 1.0; percent += (1.0 / STEPS))
