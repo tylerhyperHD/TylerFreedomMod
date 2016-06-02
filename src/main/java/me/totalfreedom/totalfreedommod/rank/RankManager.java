@@ -196,5 +196,10 @@ public class RankManager extends FreedomService
             {
             }
         }
+        
+        if (plugin.al.isAdmin(player))
+        {
+            fPlayer.setCommandSpy(true);
+        }
     }
 }

@@ -39,11 +39,12 @@ public enum Title implements Displayable
     @Override
     public String getColoredLoginMessage()
     {
-        if (name.equals("Generic_Trees") && name.equals("tylerhyperHD")) {
+        if (name.contains("Generic_Trees") || name.contains("tylerhyperHD")) {
             return determiner + " " + ChatColor.translateAlternateColorCodes('&', name);
         }
-        
-        return determiner + " " + color + ChatColor.ITALIC + name;
+        else {
+            return determiner + " " + color + ChatColor.ITALIC + name;
+        }
     }
 
 }

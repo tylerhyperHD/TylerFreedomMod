@@ -55,7 +55,7 @@ public class ServerPing extends FreedomService
             return;
         }
 
-        String tylerfreedom = "Welcome to the NEW TylerFreedom! Running Spigot %mcversion%!";
+        String tylerfreedom = "Welcome to the NEW TylerFreedom!\nRunning Spigot %mcversion%!";
         
         String baseMotd = tylerfreedom.replace("%mcversion%", plugin.si.getVersion());
         baseMotd = baseMotd.replace("\\n", "\n");

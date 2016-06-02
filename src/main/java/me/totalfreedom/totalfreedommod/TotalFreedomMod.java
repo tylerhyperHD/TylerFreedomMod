@@ -92,7 +92,6 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
     public AutoEject ae;
     public MovementValidator mv;
     public EntityWiper ew;
-    public FrontDoor fd;
     public ServerPing sp;
     public ItemFun it;
     public Landminer lm;
@@ -190,7 +189,6 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
 
         mv = services.registerService(MovementValidator.class);
         ew = services.registerService(EntityWiper.class);
-        fd = services.registerService(FrontDoor.class);
         sp = services.registerService(ServerPing.class);
 
         // Fun
