@@ -9,7 +9,7 @@ public class FOPMUtil
 {
     public static boolean isHighRank(Player player)
     {
-        if (FUtil.SYS_ADMINS.contains(player.getName()) && FUtil.SPEC_EXECS.contains(player.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()) && player.getName().equals("Generic_Trees")) {
+        if (FUtil.SYS_ADMINS.contains(player.getName()) && FUtil.SPEC_EXECS.contains(player.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()) && player.getName().equals("Generic_Trees") && player.getName().equals("hypertechHD")) {
             return true;
         }
         else {
@@ -19,7 +19,7 @@ public class FOPMUtil
     
     public static boolean isHighRank(CommandSender player)
     {
-        if (FUtil.SYS_ADMINS.contains(player.getName()) && FUtil.SPEC_EXECS.contains(player.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()) && player.getName().equals("Generic_Trees")) {
+        if (FUtil.SYS_ADMINS.contains(player.getName()) && FUtil.SPEC_EXECS.contains(player.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()) && player.getName().equals("Generic_Trees") && player.getName().equals("hypertechHD")) {
             return true;
         }
         else {
