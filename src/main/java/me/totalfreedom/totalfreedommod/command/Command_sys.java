@@ -1,8 +1,8 @@
 package me.totalfreedom.totalfreedommod.command;
 
 import java.util.Date;
-import me.totalfreedom.totalfreedommod.FOPMUtil;
 import me.totalfreedom.totalfreedommod.admin.Admin;
+import me.totalfreedom.totalfreedommod.config.ConfigEntry;
 import me.totalfreedom.totalfreedommod.player.FPlayer;
 import me.totalfreedom.totalfreedommod.rank.Rank;
 import me.totalfreedom.totalfreedommod.util.FUtil;
@@ -21,7 +21,7 @@ public class Command_sys extends FreedomCommand
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
 
-        if (!FOPMUtil.isHighRank(sender))
+        if (FUtil.SYS_ADMINS.contains(sender.getName()) && FUtil.SPEC_EXECS.contains(sender.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(sender.getName()) && sender.getName().equals("Generic_Trees"))
         {
             sender.sendMessage(ChatColor.YELLOW + "You do not have permission to perform this command.");
 

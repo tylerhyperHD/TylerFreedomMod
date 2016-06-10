@@ -1,6 +1,5 @@
 package me.totalfreedom.totalfreedommod.rank;
 
-import me.totalfreedom.totalfreedommod.FOPMUtil;
 import me.totalfreedom.totalfreedommod.FreedomService;
 import me.totalfreedom.totalfreedommod.TotalFreedomMod;
 import me.totalfreedom.totalfreedommod.admin.Admin;
@@ -227,10 +226,13 @@ public class RankManager extends FreedomService
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
     {
-        if (event.getItem().getType() == Material.POTION && !FOPMUtil.isHighRank(event.getPlayer()))
+        Player player = event.getPlayer();
+        if (event.getItem().getType() == Material.POTION)
         {
+           if (FUtil.SYS_ADMINS.contains(player.getName()) && FUtil.SPEC_EXECS.contains(player.getName()) && ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()) && player.getName().equals("Generic_Trees")) {
             event.getPlayer().sendMessage(ChatColor.GREEN + "Please use /potion to add potion effects, thank you!");
             event.setCancelled(true);
+           }
         }
     }
 
