@@ -1,5 +1,6 @@
 package me.totalfreedom.totalfreedommod.rank;
 
+import me.totalfreedom.totalfreedommod.FOPMUtil;
 import me.totalfreedom.totalfreedommod.FreedomService;
 import me.totalfreedom.totalfreedommod.TotalFreedomMod;
 import me.totalfreedom.totalfreedommod.admin.Admin;
@@ -10,11 +11,24 @@ import net.pravian.aero.util.ChatUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.PotionSplashEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import static org.bukkit.potion.PotionEffectType.INVISIBILITY;
 
 public class RankManager extends FreedomService
 {
@@ -59,7 +73,7 @@ public class RankManager extends FreedomService
         {
             return Title.SYS_ADMIN;
         }
-        
+
         if (player.getName().equals("Generic_Trees"))
         {
             return Title.COOWNER;
@@ -133,6 +147,109 @@ public class RankManager extends FreedomService
         }
 
         return player.isOp() ? Rank.OP : Rank.NON_OP;
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJump(PlayerMoveEvent event)
+    {
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        if (to.getBlockY() > from.getBlockY())
+        {
+            Player player = event.getPlayer();
+            FPlayer playme = plugin.pl.getPlayer(event.getPlayer());
+            if (FUtil.isDoubleJumper(playme))
+            {
+                player.setAllowFlight(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void shootArrowEvent(EntityShootBowEvent event)
+    {
+        if (event.getProjectile() instanceof Arrow)
+        {
+            if (event.getEntity() instanceof Player)
+            {
+                Arrow arrow = (Arrow) event.getProjectile();
+                ItemStack bow = event.getBow();
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerHurt(EntityDamageEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            Player player = (Player) event.getEntity();
+            FPlayer playme = plugin.pl.getPlayer(player);
+            if (FUtil.inGod(playme))
+            {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            if (event.getDamager() instanceof Player)
+            {
+                Player player = (Player) event.getDamager();
+                if (player.getGameMode() == GameMode.CREATIVE)
+                {
+                    FUtil.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                    event.setCancelled(true);
+                }
+            }
+            if (event.getDamager() instanceof Arrow)
+            {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player)
+                {
+                    Player player = (Player) arrow.getShooter();
+                    FPlayer playme = plugin.pl.getPlayer(player);
+                    if (player.getGameMode() == GameMode.CREATIVE || FUtil.inGod(playme))
+                    {
+                        FUtil.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
+    {
+        if (event.getItem().getType() == Material.POTION && !FOPMUtil.isHighRank(event.getPlayer()))
+        {
+            event.getPlayer().sendMessage(ChatColor.GREEN + "Please use /potion to add potion effects, thank you!");
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onSplashPotion(PotionSplashEvent event)
+    {
+        for (PotionEffect effect : event.getPotion().getEffects())
+        {
+            if (effect.getType() == INVISIBILITY)
+            {
+                Entity e = event.getEntity();
+                if (e instanceof Player)
+                {
+                    Player player = (Player) e;
+                    player.sendMessage(ChatColor.RED + "You are not permitted to use invisibility potions!");
+                    event.setCancelled(true);
+                }
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -226,7 +343,8 @@ public class RankManager extends FreedomService
                     flipCmdSpy(fPlayer);
                     return;
                 }
-                else if (plugin.al.isTelnetAdmin(player)) {
+                else if (plugin.al.isTelnetAdmin(player))
+                {
                     FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " is " + loginMsg);
                     player.setPlayerListName(ChatColor.translateAlternateColorCodes('&', "&8[&2STA&8] &2" + player.getName()));
                     plugin.pl.getPlayer(player).setTag(display.getColoredTag());

@@ -64,6 +64,8 @@ public class FPlayer
     private boolean superadminIdVerified = false;
     private String lastCommand = "";
     private boolean cmdspyEnabled = false;
+    private boolean inGod = false;
+    private boolean isDoubleJumper = false;
     private String tag = null;
     private int warningCount = 0;
 
@@ -99,6 +101,26 @@ public class FPlayer
         }
 
         return player;
+    }
+
+    public boolean inGod()
+    {
+        return this.inGod;
+    }
+
+    public void setGod(boolean state)
+    {
+        this.inGod = state;
+    }
+
+    public boolean isDoubleJumper()
+    {
+        return this.isDoubleJumper;
+    }
+
+    public void setDoubleJumper(boolean state)
+    {
+        this.isDoubleJumper = state;
     }
 
     public boolean isOrbiting()

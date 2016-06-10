@@ -129,7 +129,7 @@ public class AdminList extends FreedomService
 
         return admin != null && admin.isActive();
     }
-    
+
     public boolean isTelnetAdmin(CommandSender sender)
     {
         Admin admin = getAdmin(sender);
@@ -245,7 +245,14 @@ public class AdminList extends FreedomService
 
     public boolean isAdminImpostor(Player player)
     {
-        return getEntryByName(player.getName()) != null && !isAdmin(player);
+        if (FUtil.imposters.contains(player.getName()))
+        {
+            return true;
+        }
+        else
+        {
+            return getEntryByName(player.getName()) != null && !isAdmin(player);
+        }
     }
 
     public boolean isIdentityMatched(Player player)
@@ -351,7 +358,7 @@ public class AdminList extends FreedomService
 
             if (verbose)
             {
-                FUtil.adminAction("TotalFreedomMod", "Deactivating superadmin " + admin.getName() + ", inactive for " + lastLoginHours + " hours", true);
+                FUtil.adminAction(ConfigEntry.SERVER_NAME.getString(), "Deactivating superadmin " + admin.getName() + ", inactive for " + lastLoginHours + " hours", true);
             }
 
             admin.setActive(false);

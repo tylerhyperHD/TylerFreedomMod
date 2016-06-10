@@ -81,6 +81,7 @@ public enum ConfigEntry
     FAMOUS_PLAYERS(List.class, "famous_players"),
     NOADMIN_IPS(List.class, "noadmin_ips"),
     ADMIN_ONLY_MODE(Boolean.class, "admin_only_mode"),
+    TRAINING_SESSION(Boolean.class, "training_mode"),
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe");
     //
     private final Class<?> type;

@@ -36,9 +36,9 @@
     </organization>
 
     <scm>
-        <connection>scm:git:git@github.com:TotalFreedom/TotalFreedomMod.git</connection>
-        <developerConnection>scm:git:git@github.com:TotalFreedom/TotalFreedomMod.git</developerConnection>
-        <url>git@github.com:TotalFreedom/TotalFreedomMod.git</url>
+        <connection>scm:git:git@github.com:tylerhyperHD/TylerFreedomMod.git</connection>
+        <developerConnection>scm:git:git@github.com:tylerhyperHD/TylerFreedomMod.git</developerConnection>
+        <url>git@github.com:tylerhyperHD/TylerFreedomMod.git</url>
     </scm>
 
     <repositories>

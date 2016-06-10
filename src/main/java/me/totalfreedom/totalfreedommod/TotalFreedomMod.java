@@ -98,7 +98,7 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
     public MP44 mp;
     public Jumppads jp;
     public Trailer tr;
-    public HTTPDaemon hd;
+    public HTTPDaemon hd;    
     //
     // Bridges
     public ServiceManager<TotalFreedomMod> bridges;
