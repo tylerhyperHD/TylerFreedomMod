@@ -39,9 +39,9 @@ public class FUtil
     public static final String SAVED_FLAGS_FILENAME = "savedflags.dat";
     // See https://github.com/TotalFreedom/License - None of the listed names may be removed.
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "Prozza", "Wild1145", "WickedGamingUK");
-    public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "xDestroyer217", "Freelix2000", "slimeh4778");
+    public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "Dragonfire147", "Freelix2000", "slimeh4778");
     public static final List<String> SYS_ADMINS = Arrays.asList("Dragonfire147");
-    public static final List<String> SPEC_EXECS = Arrays.asList("");
+    public static final List<String> SPEC_EXECS = Arrays.asList("samennis1");
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<>();
     public static final List<ChatColor> CHAT_COLOR_POOL = Arrays.asList(

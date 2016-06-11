@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import lombok.Getter;
 import me.totalfreedom.totalfreedommod.FreedomService;
 import me.totalfreedom.totalfreedommod.TotalFreedomMod;
@@ -45,6 +46,7 @@ public class AdminList extends FreedomService
     }
 
     @Override
+    @SuppressWarnings("Convert2Lambda")
     protected void onStart()
     {
         load();
@@ -77,7 +79,7 @@ public class AdminList extends FreedomService
             ConfigurationSection section = config.getConfigurationSection(key);
             if (section == null)
             {
-                logger.warning("Invalid admin list format: " + key);
+                logger.log(Level.WARNING, "Invalid admin list format: {0}", key);
                 continue;
             }
 
@@ -270,7 +272,7 @@ public class AdminList extends FreedomService
     {
         if (!admin.isValid())
         {
-            logger.warning("Could not add admin: " + admin.getConfigKey() + " Admin is missing details!");
+            logger.log(Level.WARNING, "Could not add admin: {0} Admin is missing details!", admin.getConfigKey());
             return false;
         }
 

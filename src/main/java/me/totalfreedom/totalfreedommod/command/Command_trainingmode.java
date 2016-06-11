@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 @CommandParameters(description = "Close server to non-superadmins.", usage = "/<command> [on | off]", aliases = "tm")
 public class Command_trainingmode extends FreedomCommand
 {
+
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
@@ -43,8 +44,10 @@ public class Command_trainingmode extends FreedomCommand
             FUtil.adminAction(sender.getName(), "Starting the Training Mode Session...", true);
             for (Player player : server.getOnlinePlayers())
             {
-                checkRank(Rank.SENIOR_ADMIN);
-                player.kickPlayer(ConfigEntry.SERVER_NAME.getString() + " is now in a Training Session.");
+                if (plugin.al.isSeniorAdmin(player))
+                {
+                    player.kickPlayer(ConfigEntry.SERVER_NAME.getString() + " is now in a Training Session.");
+                }
             }
             return true;
         }
